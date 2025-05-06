@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}About Us | TBR Carousel{% endblock %}
+
+{% block content %}
+{#    <div class="about-title">About Us</div>#}
+    <div class="about">
+        <div class="about-container">
+        <p>📚 Welcome to TBR Carousel — where your next great read is always one spin away!
+            We're the whimsical wizards behind the curtain, curating bookish bliss based on your mood, genre cravings,
+            and attention span (we see you, weekend warriors and binge readers). Think of us as your literary matchmakers:
+            less awkward than a dating app, more magical than a library card, and way more fun than judging a book by its
+            cover (though we totally still do that). Ready to give your TBR pile a glow-up? Let’s turn the page together.✨</p>
+        </div>
+
+        <div class="join-message">
+            <p>Feeling bookish? <a href="{{ url_for('auth.signup') }}">Join us now! →</a></p>
+        </div>
+    </div>
+{% endblock %}

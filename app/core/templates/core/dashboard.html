@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | TBR Carousel{% endblock %}
+
+{% block content %}
+<div class="dashboard-wrapper">
+    <h2>Welcome, {{ user.username }}!</h2>
+
+    <p>Ready to manage your books?</p>
+    <ul>
+        <li><a href="{{ url_for('books.library') }}">📚 My Library</a> (view, add, edit, delete books)</li>
+{#        <li><a href="{{ url_for('carousel.setup') }}">🎡 My Carousel</a> (spin for your next read)</li>#}
+        <li><a href="#">🎡 My Carousel</a> (spin for your next read)</li>
+        <li><a href="{{ url_for('auth.logout') }}">🚪 Log Out</a></li>
+
+    </ul>
+</div>
+{% endblock %}

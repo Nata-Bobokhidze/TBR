@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Your Library{% endblock %}
+
+{% block content %}
+<div class="library-container">
+  <div class="book-list">
+    <h1>Your Library</h1>
+
+    {% if books %}
+      <ul>
+        {% for book in books %}
+          <li>
+            <strong>{{ book.title }}</strong> by {{ book.author }}<br>
+            Genre: {{ book.genre }} | Mood: {{ book.mood or 'N/A' }} | Length: {{ book.length or 'N/A' }} | Status: {{ book.status }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>You haven’t added any books yet!</p>
+    {% endif %}
+
+    <p><a href="{{ url_for('books.addbook') }}">Add Book</a></p>
+  </div>
+
+  <div class="library-image">
+    <img src="{{ url_for('static', filename='images/cutie.jpg') }}" alt="Cute pic">
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Login | TBR Carousel{% endblock %}
+
+{% block content %}
+<div class="login-wrapper">
+    <h2 class="login-title">Welcome Back!</h2>
+    <div class="login-container">
+        <form method="POST" action="{{ url_for('auth.login') }}">
+            {{ form.hidden_tag() }}
+            {{ form.username(size=32, placeholder="Username") }}<br>
+            {{ form.password(size=32, placeholder="Password") }}<br>
+            {{ form.submit() }}
+        </form>
+
+        <div class="forgot-password">
+            <a href="#">Forgot password?</a>
+        </div>
+
+        <div class="login-signup">
+            <p>Don't have an account? <a href="{{ url_for('auth.signup') }}">Sign up here! →</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

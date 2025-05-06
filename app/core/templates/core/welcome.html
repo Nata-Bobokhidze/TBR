@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome | TBR Carousel{% endblock %}
+
+{% block content %}
+<div class="circle" onclick="goToAbout()">WELCOME TO TBR CAROUSEL</div>
+
+<script>
+    function goToAbout() {
+        window.location.href = "/about";
+    }
+</script>
+{% endblock %}
