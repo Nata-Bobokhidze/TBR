@@ -1,0 +1,195 @@
+{#{% extends 'base.html' %}#}
+{#{% block title %}Spin the Wheel!{% endblock %}#}
+{##}
+{#{% block content %}#}
+{#<div class="wheel-container">#}
+{#  <div class="wheel-box">#}
+{#    <div class="wheel" id="wheel">#}
+{#      {% for book in books %}#}
+{#        <div class="segment" style="--i: {{ loop.index0 }}; --total: {{ books|length }};">#}
+{#          <span>{{ book.title }}</span>#}
+{#        </div>#}
+{#      {% endfor %}#}
+{#    </div>#}
+{#    <div class="wheel-pointer">▲</div>#}
+{#  </div>#}
+{#  <button id="spinButton" class="spin-button">🎲 SPIN</button>#}
+{#</div>#}
+{##}
+{#<!-- Popup result -->#}
+{#<div id="popup" class="popup hidden">#}
+{#  <div class="popup-content">#}
+{#    <h2 id="bookTitle"></h2>#}
+{#    <p id="bookAuthor"></p>#}
+{#    <a id="startReadingBtn" class="spin-button">Start Reading</a>#}
+{#    <button id="spinAgain" class="spin-button">Spin Again</button>#}
+{#  </div>#}
+{#</div>#}
+{##}
+{#<link rel="stylesheet" href="{{ url_for('static', filename='css/wheel.css') }}">#}
+{#<script>#}
+{#  const books = {{ books|tojson }};#}
+{#</script>#}
+{#<script src="{{ url_for('static', filename='js/wheel.js') }}"></script>#}
+{#{% endblock %}#}
+
+
+{#{% extends 'base.html' %}#}
+{#{% block title %}My Book Vault{% endblock %}#}
+{##}
+{#{% block content %}#}
+{#<h1>My Book Vault</h1>#}
+{#<button id="spinButton" class="spin-button" aria-label="Spin the book carousel">Spin</button>#}
+{##}
+{#<div class="carousel-container" aria-label="Cozy vintage book carousel">#}
+{#  <div class="carousel-wheel" id="wheel" role="list" tabindex="0" aria-live="polite" aria-atomic="true" aria-relevant="additions removals">#}
+{#    {% for book in books %}#}
+{#      <div class="carousel-item" tabindex="0" data-book-id="{{ book.id }}">#}
+{#        {{ book.title }}#}
+{#      </div>#}
+{#    {% endfor %}#}
+{#  </div>#}
+{#</div>#}
+{##}
+{#<div id="modalOverlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc" tabindex="-1">#}
+{#  <div class="modal-content">#}
+{#    <button id="closeBtn" class="close-btn" aria-label="Close book info">&times;</button>#}
+{#    <h2 id="modal-title">Sample Title</h2>#}
+{#    <p id="modal-desc">Sample book description...</p>#}
+{#    <p><strong>Author:</strong> <span id="book-author"></span></p>#}
+{#    <p><strong>Genre:</strong> <span id="book-genre"></span></p>#}
+{#    <p><strong>Mood:</strong> <span id="book-mood"></span></p>#}
+{#    <p><strong>Length:</strong> <span id="book-length"></span></p>#}
+{#  </div>#}
+{#</div>#}
+{##}
+{#<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">#}
+{##}
+{#<script>#}
+{#  const books = {{ books|tojson }};#}
+{##}
+{#  function getBookById(id) {#}
+{#    return books.find(b => b.id === id);#}
+{#  }#}
+{##}
+{#  function showModal(book) {#}
+{#    document.getElementById('modal-title').textContent = book.title;#}
+{#    document.getElementById('book-author').textContent = book.author;#}
+{#    document.getElementById('book-genre').textContent = book.genre;#}
+{#    document.getElementById('book-mood').textContent = book.mood;#}
+{#    document.getElementById('book-length').textContent = book.length;#}
+{#    document.getElementById('modalOverlay').classList.add('show');#}
+{#  }#}
+{##}
+{#  function hideModal() {#}
+{#    document.getElementById('modalOverlay').classList.remove('show');#}
+{#  }#}
+{##}
+{#  document.addEventListener('DOMContentLoaded', () => {#}
+{#    const wheel = document.getElementById('wheel');#}
+{#    const modalOverlay = document.getElementById('modalOverlay');#}
+{#    const closeBtn = document.getElementById('closeBtn');#}
+{##}
+{#    wheel.addEventListener('click', e => {#}
+{#      const item = e.target.closest('.carousel-item');#}
+{#      if (!item) return;#}
+{#      const bookId = Number(item.dataset.bookId);#}
+{#      const book = getBookById(bookId);#}
+{#      if (book) showModal(book);#}
+{#    });#}
+{##}
+{#    wheel.addEventListener('keydown', e => {#}
+{#      if (e.key === 'Enter' || e.key === ' ') {#}
+{#        e.preventDefault();#}
+{#        const item = e.target.closest('.carousel-item');#}
+{#        if (!item) return;#}
+{#        const bookId = Number(item.dataset.bookId);#}
+{#        const book = getBookById(bookId);#}
+{#        if (book) showModal(book);#}
+{#      }#}
+{#    });#}
+{##}
+{#    closeBtn.addEventListener('click', hideModal);#}
+{#    modalOverlay.addEventListener('click', e => {#}
+{#      if (e.target === modalOverlay) hideModal();#}
+{#    });#}
+{#    document.addEventListener('keydown', e => {#}
+{#      if (e.key === 'Escape' && modalOverlay.classList.contains('show')) {#}
+{#        hideModal();#}
+{#      }#}
+{#    });#}
+{#  });#}
+{#</script>#}
+{#{% endblock %}#}
+
+{#{% extends 'base.html' %}#}
+{#{% block content %}#}
+{#<div class="wheel-wrapper">#}
+{#  <!-- pointer at top -->#}
+{#  <div id="wheel-pointer"></div>#}
+{##}
+{#  <!-- the actual spinning wheel -->#}
+{#  <canvas id="wheel" width="500" height="500"></canvas>#}
+{##}
+{#  <!-- center knob -->#}
+{#  <div id="wheel-knob"></div>#}
+{#</div>#}
+{##}
+{#<button id="spin" class="spin-button">SPIN</button>#}
+{##}
+{#<!-- Popup modal -->#}
+{#<div id="result-modal" class="modal">#}
+{#  <div class="modal-content">#}
+{#    <span id="close-modal" class="close">&times;</span>#}
+{#    <h2 id="book-title"></h2>#}
+{#    <p><strong>Author:</strong> <span id="book-author"></span></p>#}
+{#    <p><strong>Genre:</strong> <span id="book-genre"></span></p>#}
+{#    <p><strong>Mood:</strong> <span id="book-mood"></span></p>#}
+{#    <p><strong>Length:</strong> <span id="book-length"></span></p>#}
+{#    <a id="start-reading-link" class="start-reading-button" href="#">Start Reading</a>#}
+{#  </div>#}
+{#</div>#}
+{##}
+{#<script>#}
+{#  const books = {{ books|tojson }};#}
+{#</script>#}
+{#<link rel="stylesheet" href="{{ url_for('static', filename='css/wheel.css') }}">#}
+{#<script src="{{ url_for('static', filename='js/spin_wheel.js') }}"></script>#}
+{#{% endblock %}#}
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="wheel-wrapper">
+    <div id="wheel-pointer"></div>
+  <canvas id="wheel" width="500" height="500"></canvas>
+  <div id="wheel-knob"></div>
+</div>
+
+<button id="spin" class="spin-button">SPIN</button>
+
+<!-- Popup modal -->
+<div id="result-modal" class="modal">
+  <div class="modal-content">
+    <span id="close-modal" class="close">&times;</span>
+    <h2 id="book-title"></h2>
+    <p><strong>Author:</strong> <span id="book-author"></span></p>
+    <p><strong>Genre:</strong> <span id="book-genre"></span></p>
+    <p><strong>Mood:</strong> <span id="book-mood"></span></p>
+    <p><strong>Length:</strong> <span id="book-length"></span></p>
+    <div class="modal-buttons">
+      <a id="start-reading-link"
+   class="start-reading-button"
+   href="#">
+  Start Reading!
+</a>
+      <button id="spin-again-btn" class="spin-again-button">Spin Again</button>
+    </div>
+  </div>
+</div>
+
+<script>const books = {{ books|tojson }};
+        const startReadingTemplate = "{{ url_for('carousel.start_reading', book_id=0) }}";
+</script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/wheel.css') }}">
+<script src="{{ url_for('static', filename='js/spin_wheel.js') }}"></script>
+{% endblock %}
