@@ -1,3 +1,4 @@
+/*Nav button at the top left corner*/
 .nav-toggle-checkbox {
     display: none;
 }
@@ -40,28 +41,35 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    background: linear-gradient(135deg, #d1c4e9, #c8e6c9); /* light purple to light green */
+    background: repeating-linear-gradient(
+        45deg,
+        #bfa2db,
+        #bfa2db 20px,
+        #e3b23c 20px,
+        #e3b23c 40px
+    ); /* circus stripes */
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Luckiest Guy', cursive;
 }
 
 .circle {
     width: 300px;
     height: 300px;
-    background-color: #8a76b6; /* light green */
+    background: radial-gradient(circle, #bca0dc, #d8b4e2);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     color: #4a148c;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: bold;
-    animation: pulse 2s infinite;
+    animation: pulse 2s infinite, spin 20s linear infinite;
     transition: transform 0.4s ease;
-    cursor: pointer;
+    box-shadow: 0 0 20px 5px #f8b500;
+    border: 5px dotted #f8b500;
 }
 
 .circle:hover {
@@ -70,6 +78,11 @@ body {
 
 .circle:active {
     transform: scale(1.2);
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 @keyframes pulse {
@@ -311,13 +324,286 @@ input[type="submit"]:hover {
     background-color: #674be7;
 }
 
-/* Flash Messages */
-.flashes li.success {
-    background-color: #d4edda;
-    color: #155724;
+/*Carousel*/
+
+.carousel-wrapper {
+  position: relative;
+  width: 320px;
+  margin: 2rem auto;
+  display: flex;
+  align-items: center;
 }
 
-.flashes li.error {
-    background-color: #f8d7da;
-    color: #721c24;
+.carousel-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-item {
+  display: none;
+  text-align: center;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.carousel-item img {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+#prev, #next {
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: none;
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+#prev:focus, #next:focus {
+  outline: 2px solid #fff;
+}
+/*carousel form*/
+
+.filter-form-container {
+  max-width: 600px;
+  margin: 3rem auto;
+  text-align: center;
+}
+
+.filter-form-container h2 {
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.7rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+/*scroll page*/
+
+.scroll-carousel-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.carousel-scroll-row {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 1rem;
+  scroll-behavior: smooth;
+}
+
+.book-card {
+  min-width: 200px;
+  background: #f0f0f0;
+  padding: 1rem;
+  border-radius: 8px;
+  flex-shrink: 0;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.book-card.highlight {
+  border: 3px solid #5b4b8a;
+  box-shadow: 0 0 10px #5b4b8a;
+  transform: scale(1.05);
+}
+
+.book-selected {
+  margin-top: 2rem;
+  padding: 1rem;
+  border-top: 1px dashed #999;
+}
+
+/*flashed messages*/
+.flashes {
+  position: fixed !important;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  width: fit-content;
+  max-width: 80%;
+  pointer-events: none;
+}
+
+.flash {
+  display: inline-block;
+  background-color: #5b4b8a;
+  color: #614c98;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+  animation: fadeOut 4s ease-in-out forwards;
+  pointer-events: all;
+}
+
+
+/*category colors */
+.flash.success {
+  background-color: #82c586;
+}
+.flash.error {
+  background-color: #f44336;
+}
+.flash.warning {
+  background-color: #ff9800;
+}
+
+@keyframes fadeOut {
+  0%   { opacity: 1; }
+  70%  { opacity: 1; }
+  100% { opacity: 0; display: none; }
+}
+
+/*wheel and popup*/
+
+.wheel-wrapper {
+  position: relative;
+  width: 520px;  height: 520px;
+  margin: 40px auto 0;
+  padding: 10px;             /* for the border */
+  background: #F5F0E1;       /* parchment tone */
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 30px rgba(0,0,0,0.2),
+    0 5px 15px rgba(0,0,0,0.3);
+  border: 8px solid #8B4513; /* warm wood */
+}
+
+/* the spinning canvas itself */
+canvas#wheel {
+  display: block;
+  width: 100%;  height: 100%;
+  border-radius: 50%;
+  transform-origin: 50% 50%;
+}
+
+/* pointer arrow */
+#wheel-pointer {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 30px solid #8B4513;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+
+/* center knob */
+#wheel-knob {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 60px;  height: 60px;
+  background: #8B4513;
+  border-radius: 50%;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/* spin button */
+.spin-button {
+  display: block;
+  margin: 20px auto;
+  padding: 12px 24px;
+  font-size: 18px;
+  background: #A0522D;
+  color: #FFF;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+.spin-button:hover {
+  background: #8B4513;
+}
+
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+.modal-content {
+  background: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  text-align: center;
+}
+.close {
+  position: absolute;
+  right: 15px; top: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+.start-reading-button {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 20px;
+  text-decoration: none;
+  background: #28a745;
+  color: #fff;
+  border-radius: 5px;
+}
+.start-reading-button:hover {
+  background: #218838;
+}
+
+/* modal buttons */
+.modal-buttons {
+  margin-top: 20px;
+  text-align: center;
+}
+.modal-buttons button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff;
+}
+.start-reading-button {
+  background: #28a745;
+}
+.start-reading-button:hover {
+  background: #218838;
+}
+.spin-again-button {
+  background: #6c757d;
+}
+.spin-again-button:hover {
+  background: #5a6268;
 }

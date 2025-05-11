@@ -34,6 +34,9 @@ def create_app():
     from app.books.routes import books
     app.register_blueprint(books, url_prefix='/books')
 
+    from app.carousel.routes import carousel
+    app.register_blueprint(carousel, url_prefix='/carousel')
+
 
     migrate = Migrate(app, db)
 

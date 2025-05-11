@@ -9,10 +9,10 @@
     <p>Ready to manage your books?</p>
     <ul>
         <li><a href="{{ url_for('books.library') }}">📚 My Library</a> (view, add, edit, delete books)</li>
-{#        <li><a href="{{ url_for('carousel.setup') }}">🎡 My Carousel</a> (spin for your next read)</li>#}
-        <li><a href="#">🎡 My Carousel</a> (spin for your next read)</li>
+         <li><a href="{{ url_for('carousel.carousel_start', filename='carousel_start.html') }}">🎡 My Carousel</a> (spin for your next read)</li>
+{#        <li><a href="{{ url_for('books.library') }}">🎡 My Carousel</a> (spin for your next read)</li>#}
+{#        <li><a href="#">🎡 My Carousel</a> (spin for your next read)</li>#}
         <li><a href="{{ url_for('auth.logout') }}">🚪 Log Out</a></li>
-
     </ul>
 </div>
 {% endblock %}
