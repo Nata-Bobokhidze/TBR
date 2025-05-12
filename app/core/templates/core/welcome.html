@@ -3,7 +3,11 @@
 {% block title %}Welcome | TBR Carousel{% endblock %}
 
 {% block content %}
-<div class="circle" onclick="goToAbout()">WELCOME TO TBR CAROUSEL</div>
+<div class="welcome-page">
+  <div class="welcome-circle" onclick="goToAbout()">
+    WELCOME TO<br>TBR CAROUSEL
+  </div>
+</div>
 
 <script>
     function goToAbout() {
@@ -11,3 +15,4 @@
     }
 </script>
 {% endblock %}
+

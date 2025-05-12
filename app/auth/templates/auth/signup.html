@@ -4,7 +4,8 @@
 
 {% block content %}
 <div class="signup-wrapper">
-    <h2 class="signup-title">  Create Your Account  </h2>
+    <h2 class="signup-title">Create Your Account</h2>
+
     <div class="signup-container">
         <form method="POST" action="{{ url_for('auth.signup') }}">
             {{ form.hidden_tag() }}
@@ -21,3 +22,4 @@
     </div>
 </div>
 {% endblock %}
+

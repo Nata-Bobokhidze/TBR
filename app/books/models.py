@@ -11,3 +11,5 @@ class Book(db.Model):
     length = db.Column(db.String)  # this will be thin, avarage, thick in the form
     status = db.Column(db.String)  # this will have reading, finished, dnf options
     user_id = db.Column(db.Integer, db.ForeignKey('Users.ID'), nullable=False)
+    cover_url = db.Column(db.String)  # For the book cover image
+    description = db.Column(db.Text)  # Optional summary

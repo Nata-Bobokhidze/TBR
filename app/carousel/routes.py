@@ -19,6 +19,10 @@ def carousel_start():
 @carousel.route('/filter', methods=['GET', 'POST'])
 @login_required
 def filter_form():
+    if Book.query.filter_by(user_id=current_user.ID).count() == 0:
+        flash("You need to add books to your library before spinning!", "info")
+        return redirect(url_for('books.my_library'))
+
     GENRE_CHOICES = [
         ('fiction', 'Fiction'),
         ('nonfiction', 'Non-Fiction'),
@@ -69,9 +73,13 @@ def filter_form():
             books = books.filter(Book.author.ilike(f'%{author}%'))
 
         books = books.all()
-        random.shuffle(books)
 
-        return render_template('carousel_scroll.html', books=books)
+        if not books:
+            flash("No books matched your filter. Try adjusting your criteria!", "warning")
+            return redirect(url_for('carousel.filter_form'))
+
+        random.shuffle(books)
+        return render_template('carousel_start.html', books=books)
 
     return render_template('filter_form.html', genres=GENRE_CHOICES, moods=MOOD_CHOICES, lengths=LENGTH_CHOICES)
 
@@ -89,6 +97,10 @@ def start_reading(book_id):
 @carousel.route('/wheel', methods=['POST'])
 @login_required
 def wheel():
+    if Book.query.filter_by(user_id=current_user.ID).count() == 0:
+        flash("You need to add books to your library before spinning!", "info")
+        return redirect(url_for('books.my_library'))
+
     genre = request.form.get('genre')
     mood = request.form.get('mood')
     length = request.form.get('length')
@@ -105,6 +117,17 @@ def wheel():
         books = books.filter(Book.author.ilike(f'%{author}%'))
 
     books = books.all()
+
+    if not books:
+        flash("No books matched your filter. Try again!", "warning")
+        return redirect(url_for('carousel.filter_form'))
+
+    if len(books) == 1:
+
+        book = books[0]
+        flash(f"Only one match: {book.title}", "info")
+        return redirect(url_for('carousel.start_reading', book_id=book.id))
+
     random.shuffle(books)
 
     books_data = [

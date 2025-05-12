@@ -1,6 +1,3 @@
-// app/static/js/spin_wheel.js
-
-// grab elements
 const canvas       = document.getElementById('wheel');
 const ctx          = canvas.getContext('2d');
 const size         = canvas.width;
@@ -12,7 +9,6 @@ const sliceAngle   = 2 * Math.PI / books.length;
 const modal        = document.getElementById('result-modal');
 const closeBtn     = document.getElementById('close-modal');
 const spinAgainBtn = document.getElementById('spin-again-btn');
-// NEW: grab the link instead of a button
 const startLink    = document.getElementById('start-reading-link');
 
 const titleEl      = document.getElementById('book-title');
@@ -21,7 +17,7 @@ const genreEl      = document.getElementById('book-genre');
 const moodEl       = document.getElementById('book-mood');
 const lengthEl     = document.getElementById('book-length');
 
-// draw wheel with cozy colors
+// draw wheel
 function getSliceColor(i) {
   const hue = (i * 360 / books.length + 10) % 360;
   return `hsl(${hue},35%,50%)`;
@@ -54,14 +50,12 @@ function showResult(book) {
   moodEl.textContent   = book.mood;
   lengthEl.textContent = book.length;
 
-  // ← updated here:
   startLink.href = startReadingTemplate.replace(/0$/, book.id);
 
   modal.style.display = 'block';
 }
 
 
-// modal close handlers
 closeBtn.onclick = () => modal.style.display = 'none';
 spinAgainBtn.onclick = () => modal.style.display = 'none';
 window.onclick = e => {
@@ -80,7 +74,6 @@ document.getElementById('spin').onclick = () => {
     const hit      = (2 * Math.PI - rad - startAngle + 2 * Math.PI) % (2 * Math.PI);
     const idx      = Math.floor(hit / sliceAngle);
 
-    // freeze at final position
     canvas.style.transition = 'none';
     canvas.style.transform  = `rotate(${finalDeg}deg)`;
 

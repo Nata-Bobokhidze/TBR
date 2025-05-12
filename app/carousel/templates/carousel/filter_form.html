@@ -2,50 +2,46 @@
 {% block title %}Filter Your Books{% endblock %}
 
 {% block content %}
-<div class="filter-form-container">
-  <h2>What are you in the mood for today?</h2>
+<div class="filter-page">
+  <h1 class="filter-title">What are you in the mood for today?</h1>
 
-  <form method="POST" action="{{ url_for('carousel.wheel') }}">
-  <div class="form-group">
-    <label for="genre">Genre</label>
-    <select name="genre" id="genre">
-      <option value="">-- Any genre --</option>
-      {% for value, label in genres %}
-        <option value="{{ value }}">{{ label }}</option>
-      {% endfor %}
-    </select>
-  </div>
+  <form method="POST" action="{{ url_for('carousel.wheel') }}" class="filter-form">
+    <div class="form-group">
+      <label for="genre">Genre</label>
+      <select name="genre" id="genre">
+        <option value="">-- Any genre --</option>
+        {% for value, label in genres %}
+          <option value="{{ value }}">{{ label }}</option>
+        {% endfor %}
+      </select>
+    </div>
 
-  <div class="form-group">
-    <label for="author">Author</label>
-    <input type="text" name="author" id="author" placeholder="Type in your author of the day!">
-  </div>
+    <div class="form-group">
+      <label for="author">Author</label>
+      <input type="text" name="author" id="author" placeholder="Type in your author of the day!">
+    </div>
 
-  <div class="form-group">
-    <label for="mood">What's your mood like right now?</label>
-    <select name="mood" id="mood">
-      <option value="">-- Any mood --</option>
-      {% for value, label in moods %}
-        <option value="{{ value }}">{{ label }}</option>
-      {% endfor %}
-    </select>
-  </div>
+    <div class="form-group">
+      <label for="mood">What's your mood like right now?</label>
+      <select name="mood" id="mood">
+        <option value="">-- Any mood --</option>
+        {% for value, label in moods %}
+          <option value="{{ value }}">{{ label }}</option>
+        {% endfor %}
+      </select>
+    </div>
 
-  <div class="form-group">
-    <label for="length">Length</label>
-    <select name="length" id="length">
-      <option value="">-- Any length --</option>
-      {% for value, label in lengths %}
-        <option value="{{ value }}">{{ label }}</option>
-      {% endfor %}
-    </select>
-  </div>
+    <div class="form-group">
+      <label for="length">Length</label>
+      <select name="length" id="length">
+        <option value="">-- Any length --</option>
+        {% for value, label in lengths %}
+          <option value="{{ value }}">{{ label }}</option>
+        {% endfor %}
+      </select>
+    </div>
 
-  <button type="submit" class="spin-button">Let's see the books!</button>
-</form>
-
+    <button type="submit" class="filter-submit">Let’s see the books!</button>
+  </form>
 </div>
-
-{#<link rel="stylesheet" href="{{ url_for('static', filename='css/carousel.css') }}">#}
-
 {% endblock %}
