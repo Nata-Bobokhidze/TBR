@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Book{% endblock %}
+
+{% block content %}
+  <div class="form-page">
+  <h1 class="form-title">📚 Update Book Info ✏️</h1>
+
+  <form method="POST">
+      {{ form.hidden_tag() }}
+
+      <div>
+          {{ form.title.label }}<br>
+          {{ form.title(size=40) }}
+      </div>
+
+      <div>
+          {{ form.author.label }}<br>
+          {{ form.author(size=40) }}
+      </div>
+
+      <div>
+          {{ form.genre.label }}<br>
+          {{ form.genre() }}
+      </div>
+
+      <div>
+          {{ form.mood.label }}<br>
+          {{ form.mood() }}
+      </div>
+
+      <div>
+          {{ form.length.label }}<br>
+          {{ form.length() }}
+      </div>
+
+      <div>
+          {{ form.status.label }}<br>
+          {{ form.status() }}
+      </div>
+
+      <div>
+          {{ form.submit(value='Update') }}
+      </div>
+  </form>
+
+  <p><a href="{{ url_for('books.library') }}">Back to Library</a></p>
+  </div>
+{% endblock %}
