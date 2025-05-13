@@ -46,6 +46,7 @@ Visit http://localhost:5000 in your browser.
 ```
 
 ## Project Structure
+```bash
 TBR/
 ├── app/              # Factory app package
 ├── auth/             # Authentication blueprint
@@ -58,7 +59,7 @@ TBR/
 ├── Dockerfile        # For Docker builds
 ├── requirements.txt  # Dependencies
 └── README.md         # This file
-
+```
 ## Author
 
 **Nata Bobokhidze**  
