@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 import requests
 from sqlalchemy.exc import SQLAlchemyError
-
 from app.books.forms import BookForm
 from .models import Book
 from app.app import db
@@ -33,6 +32,7 @@ def library():
 
 
 @books.route('/addbook', methods=['GET', 'POST'])
+@login_required
 def addbook():
     form = BookForm()
     if form.validate_on_submit():
@@ -40,7 +40,7 @@ def addbook():
 
         new_book = Book(
             title=form.title.data,
-            author=form.author.data,
+            author=form.author.data or (book_data['author'] if book_data else None),
             genre=form.genre.data,
             status=form.status.data,
             user_id=current_user.ID,
@@ -61,6 +61,28 @@ def addbook():
 
     return render_template('books/addbook.html', form=form)
 
+@books.route('/editbook/<int:book_id>', methods=['GET', 'POST'])
+@login_required
+def editbook(book_id):
+    book = Book.query.get(book_id)
+    form = BookForm(obj=book)
+
+    if form.validate_on_submit():
+
+        book.title = form.title.data
+        book.author = form.author.data
+        book.genre = form.genre.data
+        book.mood = form.mood.data
+        book.status = form.status.data
+        book.length = form.length.data
+
+
+        db.session.commit()
+        flash('Book information updated successfully!', 'success')
+        return redirect(url_for('books.library'))
+
+    return render_template('books/editbook.html', form=form, book =book)
+
 @books.route('/update_status/<int:book_id>', methods=['POST'])
 @login_required
 def update_status(book_id):
@@ -76,7 +98,6 @@ def update_status(book_id):
 @login_required
 def delete_book(book_id):
     book = Book.query.get_or_404(book_id)
-
 
     db.session.delete(book)
     db.session.commit()

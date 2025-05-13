@@ -49,6 +49,8 @@ function showResult(book) {
   genreEl.textContent  = book.genre;
   moodEl.textContent   = book.mood;
   lengthEl.textContent = book.length;
+  document.getElementById('book-description').textContent = book.description || "No description available.";
+
 
   startLink.href = startReadingTemplate.replace(/0$/, book.id);
 

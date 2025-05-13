@@ -1,10 +1,9 @@
-from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from flask import Flask
 from flask_login import LoginManager
+from flask_migrate import Migrate
 
 db = SQLAlchemy()
-
 
 def create_app():
     app = Flask(__name__, template_folder='templates')
@@ -22,9 +21,7 @@ def create_app():
     def load_user(ID):
         return User.query.get(int(ID))
 
-    from app.books.models import Book
-
-    # import and register all blueprints
+    #register all the necessary blueprints
     from app.core.routes import core
     app.register_blueprint(core, url_prefix='/')
 
@@ -37,8 +34,6 @@ def create_app():
     from app.carousel.routes import carousel
     app.register_blueprint(carousel, url_prefix='/carousel')
 
-
-    migrate = Migrate(app, db)
-
+    Migrate(app, db)
 
     return app

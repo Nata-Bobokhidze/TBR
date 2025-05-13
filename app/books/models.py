@@ -1,5 +1,4 @@
 from app.app import db
-from flask_login import current_user
 
 class Book(db.Model):
     __tablename__ = 'Books'
@@ -11,5 +10,5 @@ class Book(db.Model):
     length = db.Column(db.String)  # this will be thin, avarage, thick in the form
     status = db.Column(db.String)  # this will have reading, finished, dnf options
     user_id = db.Column(db.Integer, db.ForeignKey('Users.ID'), nullable=False)
-    cover_url = db.Column(db.String)  # For the book cover image
-    description = db.Column(db.Text)  # Optional summary
+    cover_url = db.Column(db.String)  # the book cover image
+    description = db.Column(db.Text)  # for small summary from google

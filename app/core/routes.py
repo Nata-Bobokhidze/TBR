@@ -14,6 +14,4 @@ def about():
 @core.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('core/dashboard.html', user=current_user)
-
-
+    return render_template('core/dashboard.html', user = current_user)

@@ -83,6 +83,10 @@ body {
 .flash.warning {
   background-color: #ff9800;
 }
+.flash.info{
+  background-color: #ffffff;
+}
+
 
 @keyframes fadeOut {
   0%   { opacity: 1; }
@@ -401,22 +405,6 @@ body {
 
 /*Books styles*/
 
-/* Page Background + Layout */
-/*body {*/
-/*    margin: 0;*/
-/*    padding: 0;*/
-/*    min-height: 100vh;*/
-/*    background: repeating-linear-gradient(*/
-/*        45deg,*/
-/*        #bfa2db,*/
-/*        #bfa2db 20px,*/
-/*        #e3b23c 20px,*/
-/*        #e3b23c 40px*/
-/*    ); !* circus stripes *!*/
-/*    font-family: 'Luckiest Guy', cursive;*/
-/*    overflow-x: hidden;*/
-/*}*/
-
 /* Library */
 .library-container {
     display: flex;
@@ -431,12 +419,22 @@ body {
     min-width: 300px;
 }
 
-.library-image img {
-    max-width: 250px;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+.card-body {
+  max-height: 100px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
 }
+
+.card-text {
+  font-size: 0.85rem;
+  line-height: 1.2;
+  margin-bottom: 0.25rem;
+}
+.card-title {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
 
 /* Books */
 ul {
@@ -472,6 +470,20 @@ li {
 }
 
 /* Book Forms */
+.form-page {
+  max-width: 380px;
+  margin: 2rem auto;
+  padding: 1rem 1.5rem;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 8px;   }
+
+.form-title{
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+}
+
 form {
     background-color: #fff;
     padding: 25px;
@@ -728,6 +740,14 @@ canvas#wheel {
   font-size: 16px;
   color: #fff;
 }
+
+#book-description {
+  display: inline-block;
+  max-width: 100%;
+  font-size: 0.95rem;
+  white-space: pre-wrap;
+}
+
 .start-reading-button {
   background: #28a745;
 }

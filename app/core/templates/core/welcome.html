@@ -1,18 +1,10 @@
-{% extends "base.html" %}
-
+{% extends 'base.html' %}
 {% block title %}Welcome | TBR Carousel{% endblock %}
 
 {% block content %}
-<div class="welcome-page">
-  <div class="welcome-circle" onclick="goToAbout()">
-    WELCOME TO<br>TBR CAROUSEL
-  </div>
-</div>
-
-<script>
-    function goToAbout() {
-        window.location.href = "/about";
-    }
-</script>
+    <div class="welcome-page">
+    <a href="{{ url_for('core.about') }}" class="welcome-circle">
+        WELCOME TO<br>TBR CAROUSEL
+    </a>
+    </div>
 {% endblock %}
-
